@@ -7,7 +7,8 @@ DataFetcherFacade facaden bruges til at hente url'er ved hjælp af HttpUtils<br>
 <br>
 <br>
 # Front-end indeholder react appen.<br>
-Hvis der er fejl under kørslen skal der muligvis installeres følgende:<br>
+Der benyttes materialUI og bootstrap. Hvis der er fejl under kørslen skal der muligvis installeres følgende:<br>
+ - npm install material-ui/core<br>
  - npm install react-router-dom<br>
  - npm install bootstrap<br>
 # 3semEksamen
