@@ -1,8 +1,4 @@
 import { useState } from "react";
-import Calendermonthly from "./calender_Monthly";
-import Picker from "./calender_components/datePicker";
-import { Holidays } from "./holiday_component/holiday_fetcher";
-import { Event } from "./event_components/event_fetcher";
 
 /*<p>
 Her skal der vises en kalender.
@@ -13,9 +9,9 @@ npm i --save @devexpress/dx-react-scheduler-material-ui <br/>
 og npm i @date-io/date-fns@1.x date-fns
 </p>*/
 function Arrays() {
-  const holiday_array = Holidays();
+  const holiday_array = ""
 
-  const appointment_array = Event();
+  const appointment_array = "";
 
   if (holiday_array === undefined && appointment_array === undefined) {
     console.log("loading");
@@ -47,10 +43,6 @@ const UserSite = () => {
   //}
   return (
     <>
-      <Picker setNewEvent={setNewEvent} />
-      <br />
-
-      <Calendermonthly events={data} />
     </>
   );
 };

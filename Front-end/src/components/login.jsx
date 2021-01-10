@@ -85,7 +85,6 @@ const AddUser = () => {
       </Form.Group>
       <Button variant="dark" type="submit">Add Me</Button>
       </Form>
-      <p>{JSON.stringify(user)}</p>
       </div>
   );
 };

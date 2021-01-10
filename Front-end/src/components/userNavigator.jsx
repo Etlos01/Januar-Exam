@@ -6,7 +6,7 @@ const UserNavigator = () => {
   return (
     <NavItem href="/UserSite">
       <Nav.Link as={Link} to="/UserSite">
-        Calendar
+        Opgave
       </Nav.Link>
     </NavItem>
   );
