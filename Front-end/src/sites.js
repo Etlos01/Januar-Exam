@@ -20,4 +20,6 @@ export const getCategories = Site + "category/all"
 
 export const AddActivityURL = Site + "activity";
 
+export const GetActivitiesURL = Site + "activity/getall"
+
 

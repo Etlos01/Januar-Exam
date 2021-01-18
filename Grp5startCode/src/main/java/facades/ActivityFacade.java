@@ -8,6 +8,8 @@ package facades;
 import dtos.ActivityDTO;
 import entities.Activity;
 import entities.User;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -52,5 +54,18 @@ public class ActivityFacade {
         }
         ActivityDTO newA = new ActivityDTO(activity);
         return newA;
+    }
+    
+    public List<ActivityDTO> getActivities (String userName) {
+        List<ActivityDTO> ActivityDTOList = new ArrayList<>();
+        
+        EntityManager em = emf.createEntityManager();
+        User user = em.find(User.class, userName);
+        List<Activity> activities = user.getActivityList();
+        
+        for (Activity activity : activities) {
+            ActivityDTOList.add(new ActivityDTO(activity));
+        }
+        return ActivityDTOList;
     }
 }

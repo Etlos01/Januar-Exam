@@ -1,6 +1,7 @@
 import jwt_decode from "jwt-decode";
 import { Site } from "./../sites";
-import { AddUserURL, EventURL, AddActivityURL } from "./../sites";
+import { AddUserURL, EventURL, AddActivityURL, GetActivitiesURL } from "./../sites";
+
 
 
 const URL = Site;

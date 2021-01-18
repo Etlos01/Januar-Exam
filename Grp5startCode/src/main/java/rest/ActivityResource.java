@@ -58,6 +58,15 @@ public class ActivityResource {
         throw new UnsupportedOperationException();
     }
     
+    @GET
+    @RolesAllowed("user")
+    @Path("/getall")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getActivities(){
+        String thisUser = securityContext.getUserPrincipal().getName();
+        return GSON.toJson(FACADE.getActivities(thisUser));
+    }
+
     @POST
     @RolesAllowed("user")
     @Produces({MediaType.APPLICATION_JSON})
@@ -66,7 +75,6 @@ public class ActivityResource {
         ActivityDTO a = GSON.fromJson(activity, ActivityDTO.class);
         String thisUser = securityContext.getUserPrincipal().getName();
         ActivityDTO newActivityDTO = FACADE.addActivity(a, thisUser);
-
         return GSON.toJson(newActivityDTO);
     }
     
