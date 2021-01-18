@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import facade from "./apiFacade";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 
 
 function LogIn({ login }) {
@@ -39,7 +39,7 @@ function LogIn({ login }) {
   );
 }
 function LoggedIn() {
-  const [dataFromServer, setDataFromServer] = useState("Loading...");
+  const [dataFromServer, setDataFromServer] = useState(<Spinner animation="border" />);
 
   useEffect(() => {
     facade.fetchData().then((data) => {
