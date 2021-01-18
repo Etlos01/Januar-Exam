@@ -13,7 +13,7 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author Alex Wagner
+ * @author Nyxis
  */
 public class CategoryFacade {
 

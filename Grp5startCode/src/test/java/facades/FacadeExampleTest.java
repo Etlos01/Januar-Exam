@@ -1,9 +1,15 @@
 package facades;
 
+import entities.Activity;
+import entities.CityInfo;
 import utils.EMF_Creator;
 import entities.RenameMe;
+import entities.User;
+import entities.WeatherInfo;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;

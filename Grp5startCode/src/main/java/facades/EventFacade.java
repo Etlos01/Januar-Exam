@@ -40,51 +40,51 @@ public class EventFacade {
         return instance;
     }
 
-    public EventDTO addEvent(EventDTO e, String userName) {
-        EntityManager em = emf.createEntityManager();
-        //Finder category object i databasen ud fra category string i EventDTO e
-        User user = em.find(User.class, userName);
-        Category category = em.find(Category.class, e.getCategory());
-
-        Event event = new Event(e.getInfo(), e.getStartDate(), e.getEndDate(), e.getTitle(), e.getFullday(), category);
-        user.getCalendarList().get(0).addEvent(event);
-        try {
-            em.getTransaction().begin();
-            em.persist(event);
-            em.getTransaction().commit();
-        } catch (Exception error) {
-
-        } finally {
-            em.close();
-        }
-        EventDTO newE = new EventDTO(event);
-
-        return newE;
-
-    }
-    
-    public List<EventDTO> getEvents (String userName) {
-        List<EventDTO> eventDTOList = new ArrayList<>();
-        
-        EntityManager em = emf.createEntityManager();
-        User user = em.find(User.class, userName);
-        List<Event> eventList = user.getCalendarList().get(0).getEventList();
-        
-        for (Event event : eventList) {
-            eventDTOList.add(new EventDTO(event));
-        }
-        return eventDTOList;
-    }
-
-    public EventDTO getEventsByCalendar(int calendarId) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Event> query = em.createQuery("SELECT e FROM Event e INNER JOIN e.calendarList c WHERE c.id = :c_id", Event.class);
-            query.setParameter("c_id", calendarId);
-            return new EventDTO(query.getResultList());
-        } finally {
-            em.close();
-        }
-
-    }
+//    public EventDTO addEvent(EventDTO e, String userName) {
+//        EntityManager em = emf.createEntityManager();
+//        //Finder category object i databasen ud fra category string i EventDTO e
+//        User user = em.find(User.class, userName);
+//        Category category = em.find(Category.class, e.getCategory());
+//
+//        Event event = new Event(e.getInfo(), e.getStartDate(), e.getEndDate(), e.getTitle(), e.getFullday(), category);
+//        //user.getCalendarList().get(0).addEvent(event);
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(event);
+//            em.getTransaction().commit();
+//        } catch (Exception error) {
+//
+//        } finally {
+//            em.close();
+//        }
+//        EventDTO newE = new EventDTO(event);
+//
+//        return newE;
+//
+//    }
+//    
+//    public List<EventDTO> getEvents (String userName) {
+//        List<EventDTO> eventDTOList = new ArrayList<>();
+//        
+//        EntityManager em = emf.createEntityManager();
+//        User user = em.find(User.class, userName);
+//        //List<Event> eventList = user.getCalendarList().get(0).getEventList();
+//        
+//        for (Event event : eventList) {
+//            eventDTOList.add(new EventDTO(event));
+//        }
+//        return eventDTOList;
+//    }
+//
+//    public EventDTO getEventsByCalendar(int calendarId) {
+//        EntityManager em = emf.createEntityManager();
+//        try {
+//            TypedQuery<Event> query = em.createQuery("SELECT e FROM Event e INNER JOIN e.calendarList c WHERE c.id = :c_id", Event.class);
+//            query.setParameter("c_id", calendarId);
+//            return new EventDTO(query.getResultList());
+//        } finally {
+//            em.close();
+//        }
+//
+//    }
 }

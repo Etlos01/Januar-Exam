@@ -4,17 +4,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
 import org.mindrot.jbcrypt.BCrypt;
+import entities.Activity;
 
 @Entity
 @Table(name = "users")
@@ -36,8 +39,9 @@ public class User implements Serializable {
         @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
     @ManyToMany
     private List<Role> roleList = new ArrayList<>();
-    @ManyToMany(mappedBy = "userList")
-    private List<Calendar> calendarList = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Activity> activityList;
 
     public List<String> getRolesAsStrings() {
         if (roleList.isEmpty()) {
@@ -60,8 +64,8 @@ public class User implements Serializable {
 
     public User(String userName, String userPass) {
         this.userName = userName;
-
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+        this.activityList = new ArrayList<>();
     }
 
     public String getUserName() {
@@ -92,20 +96,25 @@ public class User implements Serializable {
         roleList.add(userRole);
     }
 
-    @XmlTransient
-    public List<Calendar> getCalendarList() {
-        return calendarList;
+    public List<Activity> getActivityList() {
+        return activityList;
     }
-
-    public void setCalendarList(List<Calendar> calendarList) {
-        this.calendarList = calendarList;
+    
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
     }
-
-    public void addCalendar(Calendar calendar) {
-        if (calendar != null) {
-            this.calendarList.add(calendar);
-            calendar.getUserList().add(this);
+    
+    public void addActivity(Activity activity){
+        if(activity != null){
+            this.activityList.add(activity);
+            activity.setUser(this);
         }
     }
-
+    
+    public void removeActivity(Activity activity){
+        if(activity != null){
+            this.activityList.remove(activity);
+            
+        }
+    }
 }

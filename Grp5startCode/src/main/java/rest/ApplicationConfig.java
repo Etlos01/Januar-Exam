@@ -27,7 +27,7 @@ public class ApplicationConfig extends Application {
         resources.add(rest.AdminResource.class);
         resources.add(rest.CategoryResource.class);
         resources.add(rest.DailyFunResource.class);
-        resources.add(rest.EventResource.class);
+        //resources.add(rest.EventResource.class);
         resources.add(rest.HolidayResource.class);
         resources.add(rest.RenameMeResource.class);
         resources.add(rest.UserResource.class);
