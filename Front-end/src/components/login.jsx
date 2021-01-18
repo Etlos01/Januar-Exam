@@ -20,13 +20,17 @@ function LogIn({ login }) {
 
   return (
     <>
-    <div>
+    <div style={{textAlign : 'center'}}>
       <h2>Login</h2>
-      <form onChange={onChange}>
+      <Form onChange={onChange}>
+        <Form.Group>
         <input type="text" placeholder="User Name" id="username" />
+        </Form.Group>
+        <Form.Group>
         <input type="password" placeholder="Password" id="password" />
-        <button onClick={performLogin}>Login</button>
-      </form>
+        </Form.Group>
+        <Button variant='dark' onClick={performLogin}>Login</Button>
+      </Form>
     </div>
     <br></br>
     <AddUser/>
@@ -44,7 +48,7 @@ function LoggedIn() {
   }, []);
 
   return (
-    <div>
+    <div >
       <h2>Data Received from server</h2>
       <h3>{dataFromServer}</h3>
     </div>
@@ -72,16 +76,14 @@ const AddUser = () => {
       facade.addUser(user.fname,user.password);
     }
   return (
-    <div>
+    <div style={{textAlign : 'center'}}> 
       <h2>Add New User</h2>
       <Form onChange={handleChange} onSubmit={handleSubmit}>
       <Form.Group controlId="formBasicEmail">
-      <Form.Label>Name</Form.Label>
-      <Form.Control name="fname" placeholder="Enter Name" />
+      <input name="fname" placeholder="Enter Name" />
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
-      <Form.Label>Password</Form.Label>
-      <Form.Control name="password" placeholder="Password" />
+      <input name="password" placeholder="Password" />
       </Form.Group>
       <Button variant="dark" type="submit">Add Me</Button>
       </Form>
@@ -105,9 +107,9 @@ function LoginComplete(props) {
       {!props.loggedIn ? (
         <LogIn login={login} />
       ) : (
-        <div>
+        <div style={{textAlign : 'center'}}>
           <LoggedIn />
-          <button onClick={logout}>Logout</button>
+          <Button variant='dark' onClick={logout}>Logout</Button>
         </div>
       )}
     </div>
