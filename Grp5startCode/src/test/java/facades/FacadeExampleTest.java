@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.ActivityDTO;
 import entities.Activity;
 import entities.CityInfo;
 import utils.EMF_Creator;
@@ -23,6 +24,7 @@ public class FacadeExampleTest {
 
     private static EntityManagerFactory emf;
     private static FacadeExample facade;
+    private static ActivityFacade activityFacade;
 
     public FacadeExampleTest() {
     }
@@ -31,6 +33,7 @@ public class FacadeExampleTest {
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
        facade = FacadeExample.getFacadeExample(emf);
+       activityFacade = ActivityFacade.getActivityFacade(emf);
     }
 
     @AfterAll
@@ -43,10 +46,18 @@ public class FacadeExampleTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
+        
+        //User us1 = new User("TestMe", "Pass1");
+        
+        //Activity ac1 = new Activity("01-01-2020","Running", "12.10", 30, 10, "Ny rekord");
+        
+        //CityInfo ci1 = new CityInfo("Farum", 1000000, "Furesø",40000);
+        
+        //WeatherInfo wi1 = new WeatherInfo(20,"Skyet",60,"10 m/s");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new RenameMe("Some txt", "More text"));
+            em.persist(new Activity("01-01-2020","Running", "12.10", 30, 10, "Ny rekord"));
             em.persist(new RenameMe("aaa", "bbb"));
 
             em.getTransaction().commit();
@@ -61,9 +72,16 @@ public class FacadeExampleTest {
     }
 
     // TODO: Delete or change this method 
+//    @Test
+//    public void testAFacadeMethod() {
+//        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+//    }
+    
     @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+    public void testAddActivity(){      
+        Activity ac1 = new Activity("01-01-2020","Running", "12.10", 30, 10, "Ny rekord");
+        ActivityDTO acDTO1 = new ActivityDTO(ac1);
+        //assertEquals(acDTO1, activityFacade.addActivity(a, "TestMe");
     }
 
 }

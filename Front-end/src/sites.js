@@ -18,3 +18,6 @@ export const getEventURL = Site + "event/getallevents"
 
 export const getCategories = Site + "category/all"
 
+export const AddActivityURL = Site + "activity";
+
+

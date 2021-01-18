@@ -109,7 +109,7 @@ function LoginComplete(props) {
       ) : (
         <div style={{textAlign : 'center'}}>
           <LoggedIn />
-          <Button variant='dark' onClick={logout}>Logout</Button>
+          <Button variant='dark'onClick={logout}>Logout</Button>
         </div>
       )}
     </div>

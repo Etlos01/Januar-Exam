@@ -47,7 +47,7 @@ public class EventFacade {
 //        Category category = em.find(Category.class, e.getCategory());
 //
 //        Event event = new Event(e.getInfo(), e.getStartDate(), e.getEndDate(), e.getTitle(), e.getFullday(), category);
-//        //user.getCalendarList().get(0).addEvent(event);
+//        user.getCalendarList().get(0).addEvent(event);
 //        try {
 //            em.getTransaction().begin();
 //            em.persist(event);

@@ -7,6 +7,7 @@ import facade from "./apiFacade";
 import ValidateRoleSite from "./validateRoleSite";
 import UserSite from "./userSite";
 import AdminSite from "./adminSite";
+import AddActivity from "./addActivity";
 
 const NavBarIO = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -15,9 +16,7 @@ const NavBarIO = () => {
     <>
       <Router>
         <Header loggedIn={loggedIn} />
-        <div>
-          <Content setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
-        </div>
+        <Content setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
       </Router>
     </>
   );
@@ -26,10 +25,9 @@ const NavBarIO = () => {
 const Header = (props) => {
   return (
     <>
-      <div>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" variant="light">
           <Navbar.Brand as={Link} to="/">
-           Opgave
+           Activityz
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -45,7 +43,6 @@ const Header = (props) => {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-      </div>
     </>
   );
 };
@@ -54,11 +51,12 @@ const Content = (props) => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/AdminSite" component={AdminSite} />
-      <Route path="/UserSite" component={UserSite} />
-      <Route path="/Login">
+      <Route path="/adminSite" component={AdminSite} />
+      <Route path="/activities" component={UserSite} />
+      <Route path="/login">
         <Login setLoggedIn={props.setLoggedIn} loggedIn={props.loggedIn} />
       </Route>
+      <Route path="/addactivity" component={AddActivity} />
       <Route path="*" component={NoMatch} />
     </Switch>
   );
