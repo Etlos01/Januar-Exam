@@ -85,5 +85,15 @@ public class CityInfo implements Serializable {
     public void setPopulation(int population) {
         this.population = population;
     }
+
+    public List<Activity> getActivityList() {
+        return activityList;
+    }
+
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
+    }
+    
+    
     
 }

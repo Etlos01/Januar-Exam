@@ -1,4 +1,4 @@
-import { useState, Col } from "react";
+import { useState, useEffect, Col } from "react";
 import { Button, Modal, Form } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +9,8 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import facade from "./apiFacade";
+
+const CityInfoURL = "https://dawa.aws.dk/steder?hovedtype=Bebyggelse&undertype=by&primærtnavn=";
 
 const AddActivity = () => {
 
@@ -23,6 +25,7 @@ const AddActivity = () => {
         setSelectedDate(date);
     };
 
+
     const initialValue = {
         date: "",
         type: "",
@@ -30,6 +33,7 @@ const AddActivity = () => {
         duration: "",
         distance: "",
         comment: "",
+        cityName: ""
     };
     const [activity, setActivity] = useState(initialValue);
 
@@ -40,17 +44,44 @@ const AddActivity = () => {
         setActivity({ ...activity, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+
+    const cityValues = {
+        cityGeo: "",
+        cityMun: "",
+        cityPop: ""
+    };
+
+    const [cityInfo, setCityInfo] = useState([]);
+
+    const fetchCityInfo = async () => {
+        const data = await fetch(
+            CityInfoURL+activity.cityName, facade.makeOptions("GET",true)
+        );
+        return data.json();
+    }
+
+    const handleSubmit = async (event) => {
+        const cityInfo = await fetchCityInfo();
+        // console.log(cityInfo);
+
+        // setCityInfo(cityInfo);
+
+        // console.log(cityInfo.cityInfo.id)
+        // console.log("out of fetch going into map")
+        // console.log()
+        
         setShow(false);
         event.preventDefault();
+
+        
+        facade.addActivity(activity.date, activity.type, activity.timeOfDay, activity.duration, activity.distance, activity.comment, activity.cityName);
         window.alert("New activity was added to your profile");
-        facade.addActivity(activity.date, activity.type, activity.timeOfDay, activity.duration, activity.distance, activity.comment);
     }
 
 
     return (
         <>
-            <Button variant='dark' onClick={handleShow}>Add Activity</Button>
+            <Button variant='dark' onClick={handleShow}>Add New Activity</Button>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>New Activity</Modal.Title>
@@ -83,6 +114,10 @@ const AddActivity = () => {
                             <Form.Group controlId="comment">
                                 <Form.Label>Comment</Form.Label>
                                 <Form.Control name="comment" />
+                            </Form.Group>
+                            <Form.Group controlId="cityname">
+                                <Form.Label>City</Form.Label>
+                                <Form.Control name="cityName" />
                             </Form.Group>
                         </Form.Row>
                         {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -132,7 +167,6 @@ const AddActivity = () => {
               </Form.Row> */}
                     </Form>
                     <b></b>
-
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

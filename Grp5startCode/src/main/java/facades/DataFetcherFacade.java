@@ -7,14 +7,18 @@ package facades;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.nimbusds.jose.shaded.json.JSONObject;
+import com.nimbusds.jose.shaded.json.JSONValue;
 import dtos.BoredDTO;
 import dtos.CatFactsDTO;
+import dtos.CityInfoDTO;
 import dtos.HolidayDTO;
 import dtos.MyIPDTO;
 import dtos.SpaceDTO;
 import dtos.TrumpQuotesDTO;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import utils.HttpUtils;
 
 /**
@@ -98,4 +102,12 @@ public class DataFetcherFacade {
 
         return trumpQuotesDTO;
     }
+    
+//    public CityInfoDTO getCityInfoDTO(String name) throws IOException {
+//
+//        Gson gson = new Gson();
+//        String jasonString = HttpUtils.fetchData("https://dawa.aws.dk/steder?hovedtype=Bebyggelse&undertype=by&primærtnavn=" + name);
+//
+//        return cityInfoDTO;
+//    }
 }

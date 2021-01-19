@@ -33,6 +33,7 @@ function ShowActivities() {
                         <th>Duration</th>
                         <th>Distance</th>
                         <th>Comment</th>
+                        <th>City</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,10 +41,11 @@ function ShowActivities() {
                     <tr>
                         <td>{activity.type}</td>
                         <td>{activity.date}</td>
-                        <td>{activity.time}</td>
+                        <td>{activity.timeOfDay}</td>
                         <td>{activity.duration}</td>
                         <td>{activity.distance}</td>
                         <td>{activity.comment}</td>
+                        <td>{activity.cityName}</td>
                     </tr>
                     ))}
                 </tbody>

@@ -23,3 +23,6 @@ export const AddActivityURL = Site + "activity";
 export const GetActivitiesURL = Site + "activity/getall"
 
 
+export const getAllURL = Site + "activity/numberOfActivities"
+
+

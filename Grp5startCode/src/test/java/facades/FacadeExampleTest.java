@@ -77,11 +77,11 @@ public class FacadeExampleTest {
 //        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
 //    }
     
-    @Test
-    public void testAddActivity(){      
-        Activity ac1 = new Activity("01-01-2020","Running", "12.10", 30, 10, "Ny rekord");
-        ActivityDTO acDTO1 = new ActivityDTO(ac1);
+//    @Test
+//    public void testAddActivity(){      
+        //Activity ac1 = new Activity("01-01-2020","Running", "12.10", 30, 10, "Ny rekord");
+        //ActivityDTO acDTO1 = new ActivityDTO(ac1);
         //assertEquals(acDTO1, activityFacade.addActivity(a, "TestMe");
-    }
+//    }
 
 }

@@ -19,6 +19,7 @@ public class ActivityDTO {
     private int duration;
     private int distance;
     private String comment;
+    private String cityName;
 
     public ActivityDTO(Activity a) {
         this.date = a.getDate();
@@ -27,6 +28,7 @@ public class ActivityDTO {
         this.duration = a.getDuration();
         this.distance = a.getDistance();
         this.comment = a.getComment();
+        this.cityName = a.getCityInfo().getName();
     }
 
     public String getDate() {
@@ -76,10 +78,14 @@ public class ActivityDTO {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
-    
-    
-    
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
     
     
 }

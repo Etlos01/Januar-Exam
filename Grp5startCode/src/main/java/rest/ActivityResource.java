@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.ActivityDTO;
 import facades.ActivityFacade;
+import java.io.IOException;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.Context;
@@ -59,6 +60,13 @@ public class ActivityResource {
     }
     
     @GET
+    @Path("/numberOfActivities")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getNumberOfActivities(){
+        return GSON.toJson(FACADE.getNumberOfActivities());
+    }
+    
+    @GET
     @RolesAllowed("user")
     @Path("/getall")
     @Produces({MediaType.APPLICATION_JSON})
@@ -71,7 +79,7 @@ public class ActivityResource {
     @RolesAllowed("user")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public String addActivity(String activity) {
+    public String addActivity(String activity) throws IOException{
         ActivityDTO a = GSON.fromJson(activity, ActivityDTO.class);
         String thisUser = securityContext.getUserPrincipal().getName();
         ActivityDTO newActivityDTO = FACADE.addActivity(a, thisUser);

@@ -8,10 +8,14 @@ package facades;
 import dtos.ActivityDTO;
 import entities.Activity;
 import entities.User;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import dtos.CityInfoDTO;
+import entities.CityInfo;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -21,6 +25,7 @@ public class ActivityFacade {
     
     private static EntityManagerFactory emf;
     private static ActivityFacade instance;
+    private static final DataFetcherFacade DATA_FETCHER_FACADE = new DataFetcherFacade();
     
     private ActivityFacade(){
     }
@@ -38,10 +43,15 @@ public class ActivityFacade {
         return instance;
     }
     
-    public ActivityDTO addActivity(ActivityDTO a, String userName){
+    public ActivityDTO addActivity(ActivityDTO a, String userName) throws IOException{
         EntityManager em = emf.createEntityManager();
         User user = em.find(User.class, userName);
         Activity activity = new Activity(a.getDate(),a.getType(),a.getTimeOfDay(),a.getDuration(),a.getDistance(),a.getComment());
+        
+        CityInfo cityInfo = new CityInfo(a.getCityName(),10000,"Farum",10000);
+        
+        activity.setCityInfo(cityInfo);
+        
         user.addActivity(activity);
         try{
             em.getTransaction().begin();
@@ -67,5 +77,16 @@ public class ActivityFacade {
             ActivityDTOList.add(new ActivityDTO(activity));
         }
         return ActivityDTOList;
+    }
+    
+    public int getNumberOfActivities(){
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Activity> all = em.createQuery("SELECT a FROM Activity a", Activity.class);
+            return all.getResultList().size();
+        } finally {
+            em.close();
+        }
+        
     }
 }

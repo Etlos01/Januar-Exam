@@ -53,7 +53,7 @@ public class Activity implements Serializable {
         this.duration = duration;
         this.distance = distance;
         this.comment = comment;
-        this.cityInfo = cityInfo;
+        this.cityInfo = new CityInfo();
         this.weatherInfo = weatherInfo;
     }
     
@@ -127,6 +127,7 @@ public class Activity implements Serializable {
 
     public void setCityInfo(CityInfo cityInfo) {
         this.cityInfo = cityInfo;
+        cityInfo.getActivityList().add(this);
     }
 
     public WeatherInfo getWeatherInfo() {

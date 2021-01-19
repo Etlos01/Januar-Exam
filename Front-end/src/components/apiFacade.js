@@ -68,8 +68,8 @@ function ApiFacade() {
         return fetch(AddUserURL, options);
     }
 
-    const addActivity = (date, type, timeOfDay, duration, distance, comment) => {
-        const options = makeOptions("POST", true, { date: date, type: type, timeOfDay: timeOfDay, duration: duration, distance: distance, comment: comment })
+    const addActivity = (date, type, timeOfDay, duration, distance, comment, cityName) => {
+        const options = makeOptions("POST", true, { date: date, type: type, timeOfDay: timeOfDay, duration: duration, distance: distance, comment: comment, cityName: cityName})
         console.log("activity added");
 
         return fetch(AddActivityURL, options);
